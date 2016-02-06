@@ -11,7 +11,7 @@ INSTALL_PATH=""		# Installation path
 
 # Dependencies
 #TODO Add real dependencies..
-DEPENDENCIES="build-essential git eclipse openjdk-7-jdk tomcat8 mysql-server"
+DEPENDENCIES="build-essential git eclipse openjdk-7-jdk tomcat8 mysql-server tomcat8-admin tomcat8-common"
 
 # Find out what system we're working with
 pretty_name=$(cat /etc/os-release | grep PRETTY_NAME | sed -e 's/.*="\(.*\)"/\1/')
@@ -28,4 +28,6 @@ fi
 echo -e "\tUsing package manager: $PACMAN"
 
 #TODO Add the real stuff
+# edit tomcat users file
 # tc_security=no sudo sed -i 's/TOMCAT\([0-9]*\)_SECURITY.*/TOMCAT\1_SECURITY=no/' /etc/init.d/tomcat8
+# stop/start tomcat
