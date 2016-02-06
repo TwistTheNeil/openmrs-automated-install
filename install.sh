@@ -9,7 +9,7 @@ UPDATE="update"		# Package manager option to update system
 UPGRADE="upgrade"	# Package manager option to upgrade system
 INSTALL_PATH=""		# Installation path
 
-DEPENDENCIES="build-essential git openjdk-7-jdk tomcat7 tomcat7-admin mysql-server"
+DEPENDENCIES="build-essential git openjdk-7-jdk tomcat7 tomcat7-admin mysql-server curl"
 
 # Find out what system we're working with
 pretty_name=$(cat /etc/os-release | grep PRETTY_NAME | sed -e 's/.*="\(.*\)"/\1/')
