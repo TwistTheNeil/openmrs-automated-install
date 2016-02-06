@@ -34,6 +34,9 @@ for dep in "$DEPENDENCIES"; do
 	sudo $PACMAN install $dep
 done
 
+# Tomcat was started, we need to stop it for configuration
+sudo service tomcat7 stop
+
 # Notify user about the need for a password change
 less notes/tomcat-user
 
@@ -50,7 +53,7 @@ sudo chgrp -R tomcat7 /var/lib/OpenMRS
 sudo sed -i 's/TOMCAT\([0-9]*\)_SECURITY.*/TOMCAT\1_SECURITY=no/' /etc/init.d/tomcat7
 
 # stop/start tomcat
-sudo service tomcat7 restart
+sudo service tomcat7 start
 
 # Notify the user about deploying OpenMRS
 less notes/deploy 
