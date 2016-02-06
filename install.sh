@@ -28,3 +28,4 @@ fi
 echo -e "\tUsing package manager: $PACMAN"
 
 #TODO Add the real stuff
+# tc_security=no sudo sed -i 's/TOMCAT\([0-9]*\)_SECURITY.*/TOMCAT\1_SECURITY=no/' /etc/init.d/tomcat8
