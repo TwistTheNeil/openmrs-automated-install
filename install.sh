@@ -11,7 +11,7 @@ INSTALL_PATH=""		# Installation path
 
 # Dependencies
 #TODO Add real dependencies..
-DEPENDENCIES="git eclipse"
+DEPENDENCIES="build-essential git eclipse openjdk-7-jdk tomcat8 mysql-server"
 
 # Find out what system we're working with
 pretty_name=$(cat /etc/os-release | grep PRETTY_NAME | sed -e 's/.*="\(.*\)"/\1/')
