@@ -41,11 +41,20 @@ less notes/tomcat-user
 sudo cp templates/tomcat-users.xml /etc/tomcat7/
 sudo chmod 640 /etc/tomcat7/tomcat-users.xml
 
+# Create OpenMRS application data directory and make it writable by Tomcat
+sudo mkdir /var/lib/OpenMRS
+sudo chown -R tomcat7 /var/lib/OpenMRS
+sudo chgrp -R tomcat7 /var/lib/OpenMRS
+
 # Make sure tomcat7_security=no
 sudo sed -i 's/TOMCAT\([0-9]*\)_SECURITY.*/TOMCAT\1_SECURITY=no/' /etc/init.d/tomcat7
 
 # stop/start tomcat
-sudo service tomcat7 start
+sudo service tomcat7 restart
 
 # Notify the user about deploying OpenMRS
 less notes/deploy 
+
+# Download openmrs.war (This scrapes the openmrs website and this command may
+# break at any point in time. Sorry about that..)
+wget $(curl -s  http://openmrs.org/download/ | grep sourceforge | grep openmrs.war | head -n 1 | sed -e 's/.*a\shref=\"\(.*\)\/download\"\s.*/\1/')
