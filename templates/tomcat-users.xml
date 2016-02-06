@@ -27,9 +27,8 @@
   <!.. ..> that surrounds them.
 -->
   <role rolename="tomcat"/>
-  <role rolename="role1"/>
-  <user username="tomcat" password="tomcat" roles="tomcat"/>
-  <user username="both" password="tomcat" roles="tomcat,role1"/>
-  <user username="role1" password="tomcat" roles="role1"/>
+  <role rolename="admin"/>
+  <role rolename="manager"/>
+  <role rolename="manager-gui"/>
   <user name="admin" password="admin" roles="tomcat,admin,manager,manager-gui"/>
 </tomcat-users>
