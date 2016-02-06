@@ -1,0 +1,4 @@
+This repository will contain a script/collection of scripts which will help
+automate the installation of OpenMRS on select operating systems.
+
+As of now, I will be supporting debian and debian based distributions.
