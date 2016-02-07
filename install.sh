@@ -46,7 +46,7 @@ sudo service tomcat7 stop
 # Notify user about the need for a password change
 less notes/tomcat-user
 
-# Copy template tomcat users file to /etc/tomcatX/ and add permissions
+# Copy template tomcat users file to /etc/tomcatX/ and fix permissions
 sudo cp templates/tomcat-users.xml /etc/tomcat7/
 sudo chmod 640 /etc/tomcat7/tomcat-users.xml
 
@@ -55,7 +55,7 @@ sudo mkdir /var/lib/OpenMRS
 sudo chown -R tomcat7 /var/lib/OpenMRS
 sudo chgrp -R tomcat7 /var/lib/OpenMRS
 
-# Make sure tomcat7_security=no
+# Make sure we aren't using java_security by setting tomcat7_security=no
 sudo sed -i 's/^TOMCAT\([0-9]*\)_SECURITY.*/TOMCAT\1_SECURITY=no/' /etc/init.d/tomcat7
 
 # Reload daemon because of the changes to init.d
