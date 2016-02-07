@@ -50,7 +50,7 @@ sudo chown -R tomcat7 /var/lib/OpenMRS
 sudo chgrp -R tomcat7 /var/lib/OpenMRS
 
 # Make sure tomcat7_security=no
-sudo sed -i 's/TOMCAT\([0-9]*\)_SECURITY.*/TOMCAT\1_SECURITY=no/' /etc/init.d/tomcat7
+sudo sed -i 's/^TOMCAT\([0-9]*\)_SECURITY.*/TOMCAT\1_SECURITY=no/' /etc/init.d/tomcat7
 
 # stop/start tomcat
 sudo service tomcat7 start
