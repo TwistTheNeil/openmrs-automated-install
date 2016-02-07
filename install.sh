@@ -1,6 +1,8 @@
 #!/bin/bash
 #------------------------------------------------------------------------------
-# 
+# Usage: ./install.sh
+# Purpose: Automate the installation process on debian and perhaps more
+#	   distributions in the future since
 #------------------------------------------------------------------------------
 
 # Variables we would find important
