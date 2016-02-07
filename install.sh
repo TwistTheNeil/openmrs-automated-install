@@ -1,6 +1,6 @@
 #!/bin/bash
 #------------------------------------------------------------------------------
-# Add stuff here later
+# 
 #------------------------------------------------------------------------------
 
 # Variables we would find important
@@ -22,6 +22,10 @@ if [ "x$release_id" == "xdebian" ]; then
 	PACMAN="apt-get"
 elif [ "x$relese_id" == "xfedora" ]; then
 	PACMAN="yum"
+else
+	echo "Oops, this script doesn't support your system. Sorry about that"
+	echo "However, you can contribute to the repository and help us support it!"
+	exit 99
 fi
 echo -e "\tUsing package manager: $PACMAN"
 
@@ -63,4 +67,10 @@ less notes/deploy
 
 # Download openmrs.war (This scrapes the openmrs website and this command may
 # break at any point in time. Sorry about that..)
-wget $(curl -s  http://openmrs.org/download/ | grep sourceforge | grep openmrs.war | head -n 1 | sed -e 's/.*a\shref=\"\(.*\)\/download\"\s.*/\1/')
+# I specify it to download to /dev/shm/
+wget $(curl -s  http://openmrs.org/download/ | grep sourceforge | grep openmrs.war | head -n 1 | sed -e 's/.*a\shref=\"\(.*\)\/download\"\s.*/\1/') -P /dev/shm/
+
+sudo mkdir /var/lib/tomcat7/webapps/openmrs
+cd /var/lib/tomcat7/webapps/openmrs
+sudo mv /dev/shm/openmrs.war .
+sudo unzip openmrs.war
