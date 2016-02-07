@@ -52,7 +52,10 @@ sudo chgrp -R tomcat7 /var/lib/OpenMRS
 # Make sure tomcat7_security=no
 sudo sed -i 's/^TOMCAT\([0-9]*\)_SECURITY.*/TOMCAT\1_SECURITY=no/' /etc/init.d/tomcat7
 
-# stop/start tomcat
+# Reload daemon because of the changes to init.d
+sudo systemctl daemon-reload
+
+# start tomcat
 sudo service tomcat7 start
 
 # Notify the user about deploying OpenMRS
