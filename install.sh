@@ -19,7 +19,7 @@ echo -e "\tOS: $pretty_name"
 
 # Init package manager details
 if [ "x$release_id" == "xdebian" ]; then
-	PACMAN="apt-get"
+	PACMAN="apt"
 elif [ "x$relese_id" == "xfedora" ]; then
 	PACMAN="yum"
 else
