@@ -70,7 +70,17 @@ less notes/deploy
 # I specify it to download to /dev/shm/
 wget $(curl -s  http://openmrs.org/download/ | grep sourceforge | grep openmrs.war | head -n 1 | sed -e 's/.*a\shref=\"\(.*\)\/download\"\s.*/\1/') -P /dev/shm/
 
+# Attempt to deploy openmrs
 sudo mkdir /var/lib/tomcat7/webapps/openmrs
 cd /var/lib/tomcat7/webapps/openmrs
 sudo mv /dev/shm/openmrs.war .
 sudo unzip openmrs.war
+
+# Wait a few seconds for tomcat to discover it
+sleep 3
+
+# Show closing note
+less notes/closing
+
+# Fire up the webapp
+firefox localhost:8080/openmrs
