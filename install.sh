@@ -12,7 +12,7 @@ UPGRADE="upgrade"	# Package manager option to upgrade system
 pretty_name=""
 release_id=""
 
-DEPENDENCIES="build-essential git openjdk-7-jdk openjdk-7-dbg openjdk-7-demo openjdk-7-doc openjdk-7-jre  tomcat7 tomcat7-admin tomcat7-common tomcat7-docs tomcat7-examples tomcat7-user mysql-server curl"
+DEPENDENCIES="build-essential git openjdk-7* tomcat7* mysql-server curl"
 
 # Find out what system we're working with
 if [ -e /etc/os-release ]; then
