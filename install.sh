@@ -17,14 +17,14 @@ DEPENDENCIES="build-essential git openjdk-7-jdk openjdk-7-dbg openjdk-7-demo ope
 # Find out what system we're working with
 if [ -e /etc/os-release ]; then
 	pretty_name=$(cat /etc/os-release | grep PRETTY_NAME | sed -e 's/.*="\(.*\)"/\1/')
-	release_id=$(cat /etc/os-release | grep ^ID | sed -e 's/.*=\(.*\)/\1/')
+	release_id=$(cat /etc/os-release | grep ^ID= | sed -e 's/.*=\(.*\)/\1/')
 else
 	release_id=$(lsb_release -i | sed -e 's/.*:\s\(.*\)/\1/')
 	pretty_name="$release_id"
 fi
 
 echo "System details:"
-echo -e "\tOS: $pretty_name"
+echo -e "\tOS: $pretty_name (ID=$release_id)"
 
 # Init package manager details
 if [ "x${release_id,,}" == "xdebian" ] || [ "x${release_id,,}" == "xubuntu" ]; then
