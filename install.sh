@@ -1,6 +1,7 @@
 #!/bin/bash
 #------------------------------------------------------------------------------
 # Usage: ./install.sh
+# Prerequisite: sudo
 # Purpose: Automate the installation process on debian and perhaps more
 #	   distributions in the future since
 #------------------------------------------------------------------------------
