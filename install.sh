@@ -9,19 +9,28 @@
 PACMAN=""		# Package manager
 UPDATE="update"		# Package manager option to update system
 UPGRADE="upgrade"	# Package manager option to upgrade system
+pretty_name=""
+release_id=""
 
 DEPENDENCIES="build-essential git openjdk-7-jdk openjdk-7-dbg openjdk-7-demo openjdk-7-doc openjdk-7-jre  tomcat7 tomcat7-admin tomcat7-common tomcat7-docs tomcat7-examples tomcat7-user mysql-server curl"
 
 # Find out what system we're working with
-pretty_name=$(cat /etc/os-release | grep PRETTY_NAME | sed -e 's/.*="\(.*\)"/\1/')
-release_id=$(cat /etc/os-release | grep ^ID | sed -e 's/.*=\(.*\)/\1/')
+if [ -e /etc/os-release ]; then
+	pretty_name=$(cat /etc/os-release | grep PRETTY_NAME | sed -e 's/.*="\(.*\)"/\1/')
+	release_id=$(cat /etc/os-release | grep ^ID | sed -e 's/.*=\(.*\)/\1/')
+else
+	release_id=$(lsb_release -i | sed -e 's/.*:\s\(.*\)/\1/')
+	pretty_name="$release_id"
+	echo 'igethere'
+fi
+
 echo "System details:"
 echo -e "\tOS: $pretty_name"
 
 # Init package manager details
-if [ "x$release_id" == "xdebian" ]; then
+if [ "x${release_id,,}" == "xdebian" ] || [ "x${release_id,,}" == "ubuntu" ]; then
 	PACMAN="apt"
-elif [ "x$relese_id" == "xfedora" ]; then
+elif [ "x${release_id,,}" == "xfedora" ]; then
 	PACMAN="yum"
 else
 	echo "Oops, this script doesn't support your system. Sorry about that"
