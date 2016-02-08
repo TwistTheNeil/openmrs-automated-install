@@ -98,4 +98,4 @@ sleep 3
 less notes/closing
 
 # Fire up the webapp
-firefox localhost:8080/openmrs
+firefox localhost:8080/openmrs &
