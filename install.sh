@@ -37,6 +37,8 @@ if [ "x${release_id,,}" == "xdebian" ] || [ "x${release_id,,}" == "xubuntu" ]; t
 	PACMAN="apt"
 elif [ "x${release_id,,}" == "xfedora" ]; then
 	PACMAN="yum"
+	echo "Needs testing on fedora. Sorry."
+	exit 88
 else
 	echo "Oops, this script doesn't support your system. Sorry about that"
 	echo "However, you can contribute to the repository and help us support it!"
