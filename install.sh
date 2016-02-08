@@ -21,14 +21,13 @@ if [ -e /etc/os-release ]; then
 else
 	release_id=$(lsb_release -i | sed -e 's/.*:\s\(.*\)/\1/')
 	pretty_name="$release_id"
-	echo 'igethere'
 fi
 
 echo "System details:"
 echo -e "\tOS: $pretty_name"
 
 # Init package manager details
-if [ "x${release_id,,}" == "xdebian" ] || [ "x${release_id,,}" == "ubuntu" ]; then
+if [ "x${release_id,,}" == "xdebian" ] || [ "x${release_id,,}" == "xubuntu" ]; then
 	PACMAN="apt"
 elif [ "x${release_id,,}" == "xfedora" ]; then
 	PACMAN="yum"
