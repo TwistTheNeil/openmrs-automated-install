@@ -5,6 +5,12 @@
 #	   distributions in the future since
 #------------------------------------------------------------------------------
 
+# Check if we have root
+if [ "$(id -u)" != "0" ]; then
+	echo "Need root for this."
+	exit 2
+fi
+
 # Variables we would find important
 PACMAN=""		# Package manager
 UPDATE="update"		# Package manager option to update system
