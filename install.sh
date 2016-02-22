@@ -36,9 +36,7 @@ echo -e "\tOS: $pretty_name (ID=$release_id)"
 if [ "x${release_id,,}" == "xdebian" ] || [ "x${release_id,,}" == "xubuntu" ]; then
 	PACMAN="apt"
 elif [ "x${release_id,,}" == "xfedora" ]; then
-	PACMAN="yum"
-	echo "Needs testing on fedora. Sorry."
-	exit 88
+	PACMAN="dnf"
 else
 	echo "Oops, this script doesn't support your system. Sorry about that"
 	echo "However, you can contribute to the repository and help us support it!"
