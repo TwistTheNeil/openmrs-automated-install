@@ -41,12 +41,12 @@ if [ "$(uname)" == "Darwin" ]; then
         # I specify it to download to /User/Downloads
         wget $(curl -s http://openmrs.org/download/ | grep sourceforge | grep openmrs.war | head -n 1 | awk -F'"' '{print $2}' | sed -e 's/\/download$//') -P ~/Downloads/
 
-        # Attempt to deploy openmrs
+        # Attempt to deploy openmrs using tomcat
         cd /usr/local/Cellar/tomcat/*/libexec/webapps/
 	mkdir openmrs
-        cd openmrs
-        mv ~/Downloads/openmrs.war .
-        unzip openmrs.war
+	cd openmrs
+	mv ~/Downloads/openmrs.war .
+	unzip openmrs.war
 
         # Wait a few seconds for tomcat to discover it
         sleep 3
@@ -55,7 +55,6 @@ if [ "$(uname)" == "Darwin" ]; then
 	/Applications/Firefox.app/Contents/MacOS/firefox http://localhost:8080/openmrs &
 
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    # Do something under GNU/Linux platform
 
 	# Check if we have root
 	if [ "$(id -u)" != "0" ]; then
@@ -153,4 +152,8 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 
 	# Fire up the webapp
 	firefox localhost:8080/openmrs &
+else
+	echo "Oops, this script doesn't support your system. Sorry about that"
+	echo "However, you can contribute to the repository and help us support it!"
+	exit 99
 fi
