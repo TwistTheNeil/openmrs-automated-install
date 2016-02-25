@@ -23,18 +23,20 @@ if [ "$(uname)" == "Darwin" ]; then
         	brew install $dep
         done
 
+	tomcat_version=$(brew info tomcat | grep 'stable' | sed 's/^.*tomcat: stable //; s/, devel.*$//')
+
 	# Shutdown tomcat in case it is running
-	/usr/local/Cellar/tomcat/*/libexec/bin/shutdown.sh &
+	/usr/local/Cellar/tomcat/$tomcat_version/libexec/bin/shutdown.sh &
 
 	# Notify user about the need for a password change
         less notes/tomcat-user-mac
 	
 	# Copy template tomcat users file to /etc/tomcatX/ and fix permissions
-        cp templates/tomcat-users.xml /usr/local/Cellar/tomcat/*/libexec/conf/
-        chmod 640 /usr/local/Cellar/tomcat/*/libexec/conf/tomcat-users.xml
+        cp templates/tomcat-users.xml /usr/local/Cellar/tomcat/$tomcat_version/libexec/conf/
+        chmod 640 /usr/local/Cellar/tomcat/$tomcat_version/libexec/conf/tomcat-users.xml
 
 	# Start tomcat
-	/usr/local/Cellar/tomcat/*/libexec/bin/startup.sh &
+	/usr/local/Cellar/tomcat/$tomcat_version/libexec/bin/startup.sh &
 
 	# Notify the user about deploying OpenMRS
 	less notes/deploy-mac
@@ -44,19 +46,13 @@ if [ "$(uname)" == "Darwin" ]; then
         # I specify it to download to /User/Downloads
         wget $(curl -s http://openmrs.org/download/ | grep sourceforge | grep openmrs.war | head -n 1 | awk -F'"' '{print $2}' | sed -e 's/\/download$//') -P ~/Downloads/
 
-	scriptloc=$(pwd)
-
         # Attempt to deploy openmrs using tomcat
-        cd /usr/local/Cellar/tomcat/*/libexec/webapps/
-	mkdir openmrs
-	cd openmrs
-	mv ~/Downloads/openmrs.war .
-	unzip openmrs.war
+        mkdir /usr/local/Cellar/tomcat/$tomcat_version/libexec/webapps/openmrs
+	mv ~/Downloads/openmrs.war /usr/local/Cellar/tomcat/$tomcat_version/libexec/webapps/openmrs
+	unzip /usr/local/Cellar/tomcat/$tomcat_version/libexec/webapps/openmrs/openmrs.war -d /usr/local/Cellar/tomcat/$tomcat_version/libexec/webapps/openmrs/
 
         # Wait a few seconds for tomcat to discover it
         sleep 3
-
-	cd $scriptloc
 
 	# Show closing note
 	less notes/closing-mac
