@@ -40,7 +40,9 @@ if [ "$(uname)" == "Darwin" ]; then
 
 	# Notify the user about deploying OpenMRS
 	less notes/deploy-mac
-
+	
+        # Older versions of OS X don't come with wget installed
+        brew install wget
 	# Download openmrs.war (This scrapes the openmrs website and this command may
         # break at any point in time. Sorry about that..)
         # I specify it to download to /User/Downloads
