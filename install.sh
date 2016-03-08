@@ -17,8 +17,8 @@ UPDATE="update"		# Package manager option to update system
 UPGRADE="upgrade"	# Package manager option to upgrade system
 pretty_name=""
 release_id=""
+DEPENDENCIES=""
 
-DEPENDENCIES="build-essential git openjdk-7* tomcat7 tomcat7-admin tomcat7-common  mysql-server curl"
 
 # Find out what system we're working with
 if [ -e /etc/os-release ]; then
@@ -34,11 +34,13 @@ echo -e "\tOS: $pretty_name (ID=$release_id)"
 
 # Init package manager details
 if [ "x${release_id,,}" == "xdebian" ] || [ "x${release_id,,}" == "xubuntu" ]; then
+	DEPENDENCIES="build-essential git openjdk-7* tomcat7 tomcat7-admin tomcat7-common  mysql-server curl"
 	PACMAN="apt"
+	TOMCAT="tomcat7"
 elif [ "x${release_id,,}" == "xfedora" ]; then
-	PACMAN="yum"
-	echo "Needs testing on fedora. Sorry."
-	exit 88
+	DEPENDENCIES="make automake gcc gcc-c++ kernel-devel git java-1.8.0-openjdk tomcat mysql-server curl"
+	PACMAN="dnf"
+	TOMCAT="tomcat"
 else
 	echo "Oops, this script doesn't support your system. Sorry about that"
 	echo "However, you can contribute to the repository and help us support it!"
@@ -56,28 +58,28 @@ for dep in "$DEPENDENCIES"; do
 done
 
 # Tomcat was started, we need to stop it for configuration
-service tomcat7 stop
+service $TOMCAT stop
 
 # Notify user about the need for a password change
 less notes/tomcat-user
 
 # Copy template tomcat users file to /etc/tomcatX/ and fix permissions
-cp templates/tomcat-users.xml /etc/tomcat7/
-chmod 640 /etc/tomcat7/tomcat-users.xml
+cp templates/tomcat-users.xml /etc/$TOMCAT/
+chmod 640 /etc/$TOMCAT/tomcat-users.xml
 
 # Create OpenMRS application data directory and make it writable by Tomcat
 mkdir /var/lib/OpenMRS
-chown -R tomcat7 /var/lib/OpenMRS
-chgrp -R tomcat7 /var/lib/OpenMRS
+chown -R $TOMCAT /var/lib/OpenMRS
+chgrp -R $TOMCAT /var/lib/OpenMRS
 
 # Make sure we aren't using java_security by setting tomcat7_security=no
-sed -i 's/^TOMCAT\([0-9]*\)_SECURITY.*/TOMCAT\1_SECURITY=no/' /etc/init.d/tomcat7
+sed -i 's/^TOMCAT\([0-9]*\)_SECURITY.*/TOMCAT\1_SECURITY=no/' /etc/init.d/$TOMCAT
 
 # Reload daemon because of the changes to init.d
 systemctl daemon-reload
 
 # start tomcat
-service tomcat7 start
+service $TOMCAT start
 
 # Notify the user about deploying OpenMRS
 less notes/deploy 
@@ -88,8 +90,8 @@ less notes/deploy
 wget $(curl -s  http://openmrs.org/download/ | grep sourceforge | grep openmrs.war | head -n 1 | sed -e 's/.*a\shref=\"\(.*\)\/download\"\s.*/\1/') -P /dev/shm/
 
 # Attempt to deploy openmrs
-mkdir /var/lib/tomcat7/webapps/openmrs
-cd /var/lib/tomcat7/webapps/openmrs
+mkdir /var/lib/$TOMCAT/webapps/openmrs
+cd /var/lib/$TOMCAT/webapps/openmrs
 mv /dev/shm/openmrs.war .
 unzip openmrs.war
 
@@ -101,3 +103,4 @@ less notes/closing
 
 # Fire up the webapp
 firefox localhost:8080/openmrs &
+
