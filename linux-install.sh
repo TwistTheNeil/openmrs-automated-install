@@ -18,9 +18,7 @@ UPGRADE="upgrade"	# Package manager option to upgrade system
 pretty_name=""
 release_id=""
 
-DEPENDENCIES="build-essential git openjdk-7* tomcat7 tomcat7-admin tomcat7-common mysql-server curl unzip sudo curl"
-
-apt-get install sudo
+DEPENDENCIES="build-essential git openjdk-7* tomcat7 tomcat7-admin tomcat7-common mysql-server curl unzip"
 
 # Find out what system we're working with
 if [ -e /etc/os-release ]; then
