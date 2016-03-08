@@ -1,0 +1,8 @@
+NOTE:
+
+Well, it looks like this script has done its job. It is still under development and so I hope you will be able to read it and undo changes if things go wrong.
+I have tested it multiple times and it has worked well on debian.
+
+Keep in mind that tomcat might take a couple seconds to minutes to fully deploy openmrs. The OpenMRS wiki says that it would take upto 10 mintues or so. For me it took aobut 2 minutes but YMMV.
+
+Good luck!

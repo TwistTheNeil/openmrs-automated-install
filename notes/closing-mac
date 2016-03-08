@@ -1,0 +1,9 @@
+NOTE:
+
+Well, it looks like this script has done its job. It is still under development and so I hope you will be able to read it and undo changes if things go wrong.
+
+Keep in mind that tomcat might take a couple seconds to minutes to fully deploy openmrs. The OpenMRS wiki says that it would take up to 10 minutes or so.
+
+This will open the window in Firefox. If you do not have firefox, navigate to the url "http://localhost:8080/openmrs"
+
+Good luck!
