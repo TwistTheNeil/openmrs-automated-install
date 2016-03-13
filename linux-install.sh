@@ -39,7 +39,7 @@ if [ "x${release_id,,}" == "xdebian" ] || [ "x${release_id,,}" == "xubuntu" ]; t
 	PACMAN="apt"
 	TOMCAT="tomcat7"
 elif [ "x${release_id,,}" == "xfedora" ]; then
-	DEPENDENCIES="make unzip automake gcc gcc-c++ kernel-devel git java-1.8.0-openjdk tomcat mysql-server curl"
+	DEPENDENCIES="make unzip automake gcc gcc-c++ kernel-devel git java-1.8.0-openjdk tomcat tomcat-webapps.noarch tomcat-admin-webapps.noarch mysql-server curl"
 	PACMAN="dnf"
 	TOMCAT="tomcat"
 else
@@ -62,7 +62,7 @@ done
 service $TOMCAT stop
 
 # Notify user about the need for a password change
-less notes/tomcat-user
+less notes/tomcat-user-linux
 
 # Copy template tomcat users file to /etc/tomcatX/ and fix permissions
 cp templates/tomcat-users.xml /etc/$TOMCAT/
@@ -83,7 +83,7 @@ systemctl daemon-reload
 service $TOMCAT start
 
 # Notify the user about deploying OpenMRS
-less notes/deploy 
+less notes/deploy-linux
 
 # Download openmrs.war (This scrapes the openmrs website and this command may
 # break at any point in time. Sorry about that..)
@@ -100,7 +100,7 @@ unzip openmrs.war
 sleep 3
 
 # Show closing note
-less notes/closing
+less notes/closing-linux
 
 # Fire up the webapp
 firefox localhost:8080/openmrs &
