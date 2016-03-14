@@ -1,8 +1,16 @@
 #!/bin/bash
 #------------------------------------------------------------------------------
-# Usage: ./install.sh
-# Purpose: Automate the installation process on debian and perhaps more
-#	   distributions in the future since
+# Usage: ./mac-install.sh
+# 
+# Purpose: Automates installation of the standalone edition of OpenMRS on a Mac.
+# This is a version of the software that would be used by the average user who is interested in using OpenMRS.
+# Note: This is NOT a setup for the development environment
+#
+#
+# The script downloads all of the dependencies that are required for OpenMRS through the use of Homebrew.
+# After all of the dependencies have been installed, the scripts sets up and starts Apache Tomcat.
+# The script then goes to the website of OpenMRS, downloads the OpenMRS standalone version, and places it in the Tomcat webapp folder.
+# The script then opens a FireFox browser with the URL to the web application.
 #------------------------------------------------------------------------------
 
 if [ "$(uname)" == "Darwin" ]; then
@@ -43,6 +51,7 @@ if [ "$(uname)" == "Darwin" ]; then
 	
         # Older versions of OS X don't come with wget installed
         brew install wget
+        
 	# Download openmrs.war (This scrapes the openmrs website and this command may
         # break at any point in time. Sorry about that..)
         # I specify it to download to /User/Downloads
@@ -61,7 +70,7 @@ if [ "$(uname)" == "Darwin" ]; then
 
 	# Open OpenMRS in Firefox
 	/Applications/Firefox.app/Contents/MacOS/firefox http://localhost:8080/openmrs &
-else
+else # Don't do anything if the machine it is being run on is not a Mac
 	echo "OS: $(uname)"
 	echo "Make sure you're running the correct script!"
 	exit 2
