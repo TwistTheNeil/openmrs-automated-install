@@ -1,8 +1,21 @@
 #!/bin/bash
 #------------------------------------------------------------------------------
-# Usage: ./install.sh
+# Usage (as root): ./linux-install.sh
+#
 # Purpose: Automate the installation process on debian and perhaps more
 #	   distributions in the future since
+#
+# Info: This script installs all the dependencies required to run an instance of
+#	OpenMRS standalone on Debian, Ubuntu, Debian derived distributions, and
+#	Fedora. After attempting to deploy OpenMRS, it will present a firefox
+#	instance loaded with a url which points to OpenMRS which the user will
+#	have to manually configure according to their liking.
+#
+# Note: This is NOT a setup for the development environment, just the standalone
+#	It takes Tomcat anywhere between 2-10 minutes to notice that openMRS
+#	has been deployed.
+#
+# Demonstration: https://www.youtube.com/watch?v=o-78lKiN0eE
 #------------------------------------------------------------------------------
 
 # Check if we have root
