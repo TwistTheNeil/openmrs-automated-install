@@ -1,16 +1,25 @@
 #!/bin/bash
 #------------------------------------------------------------------------------
+# Requirements: Homebrew
+#
 # Usage: ./mac-install.sh
 # 
 # Purpose: Automates installation of the standalone edition of OpenMRS on a Mac.
-# This is a version of the software that would be used by the average user who is interested in using OpenMRS.
-# Note: This is NOT a setup for the development environment
+# 	   This is a version of the software that would be used by the average
+#	   user who is interested in using OpenMRS.
 #
+# Info: The script downloads all of the dependencies that are required for
+# 	OpenMRS using Homebrew.	After all of the dependencies have been
+#	installed, the scripts sets up and starts Apache Tomcat. It then goes to
+#	the website of OpenMRS, downloads the OpenMRS standalone version, and
+#	places it in the Tomcat webapp directory. It then opens a FireFox
+#	browser with the URL to the web application.
 #
-# The script downloads all of the dependencies that are required for OpenMRS through the use of Homebrew.
-# After all of the dependencies have been installed, the scripts sets up and starts Apache Tomcat.
-# The script then goes to the website of OpenMRS, downloads the OpenMRS standalone version, and places it in the Tomcat webapp folder.
-# The script then opens a FireFox browser with the URL to the web application.
+# Note: This is NOT a setup for the development environment, just the standalone
+#	It takes Tomcat anywhere between 2-10 minutes to notice that openMRS
+#	has been deployed.
+#
+# Demonstration: https://www.youtube.com/watch?v=o-78lKiN0eE
 #------------------------------------------------------------------------------
 
 if [ "$(uname)" == "Darwin" ]; then
