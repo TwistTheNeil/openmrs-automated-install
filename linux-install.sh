@@ -46,6 +46,12 @@ fi
 echo "System details:"
 echo -e "\tOS: $pretty_name (ID=$release_id)"
 
+# Remove "" from release id getting default values in Centos
+if [[ ${release_id:0:1} = \" ]] ; then
+        centos_id=$(sed -e 's/^"//' -e 's/"$//' <<<"$release_id")
+        release_id=$centos_id
+fi
+
 # Init package manager details
 if [ "x${release_id,,}" == "xdebian" ] || [ "x${release_id,,}" == "xubuntu" ]; then
 	DEPENDENCIES="build-essential git openjdk-7* tomcat7 tomcat7-admin tomcat7-common mysql-server curl unzip"
@@ -53,6 +59,10 @@ if [ "x${release_id,,}" == "xdebian" ] || [ "x${release_id,,}" == "xubuntu" ]; t
 	TOMCAT="tomcat7"
 elif [ "x${release_id,,}" == "xfedora" ]; then
 	DEPENDENCIES="make unzip automake gcc gcc-c++ kernel-devel git java-1.8.0-openjdk tomcat tomcat-webapps.noarch tomcat-admin-webapps.noarch mysql-server curl"
+	PACMAN="dnf"
+	TOMCAT="tomcat"
+elif [ "x${release_id,,}" == "xcentos" ] ; then
+	DEPENDENCIES="make unzip automake gcc gcc-c++ kernel-devel git java-1.8.0-openjdk tomcat tomcat-webapps.noarch tomcat-admin-webapps.noarch mariadb-server curl"
 	PACMAN="dnf"
 	TOMCAT="tomcat"
 else
