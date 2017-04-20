@@ -6,6 +6,11 @@ Effectively, this would deploy OpenMRS and you will be able to install it as usu
 	localhost:8080/openmrs
 If this doesn't look right to you, you may kill the script now using CTRL+C after you leave this message.
 
-You may deploy OpenMRS yourself using your browser. Make sure that tomcat7 is running (sudo service tomcat7 start) without errors and then using your browser, go to
+You may deploy OpenMRS yourself using your browser. Make sure that tomcat7 is running (sudo service tomcat7 start) 
+without errors and then using your browser, go to
 	localhost:8080/manager
 Here, you will be able to locate the field where you may select the openmrs.war file and deploy it.
+
+If you are on a CentOS system make sure to run initially the command below to set up a root password 
+for the mariadb server
+	mysql_secure_installation
