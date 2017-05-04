@@ -25,6 +25,7 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 # Variables we would find important
+readonly GIT_REPO_DIR="$PWD"
 PACMAN=""		# Package manager
 UPDATE="update"		# Package manager option to update system
 UPGRADE="upgrade"	# Package manager option to upgrade system
@@ -85,7 +86,7 @@ done
 service $TOMCAT stop
 
 # Notify user about the need for a password change
-less notes/tomcat-user-linux
+less "${GIT_REPO_DIR}/notes/tomcat-user-linux"
 
 # Copy template tomcat users file to /etc/tomcatX/ and fix permissions
 cp templates/tomcat-users.xml /etc/$TOMCAT/
@@ -106,7 +107,7 @@ systemctl daemon-reload
 service $TOMCAT start
 
 # Notify the user about deploying OpenMRS
-less notes/deploy-linux
+less "${GIT_REPO_DIR}/notes/deploy-linux"
 
 # Download openmrs.war (This scrapes the openmrs website and this command may
 # break at any point in time. Sorry about that..)
@@ -123,7 +124,7 @@ unzip openmrs.war
 sleep 3
 
 # Show closing note
-less notes/closing-linux
+less "${GIT_REPO_DIR}/notes/closing-linux"
 
 # Fire up the webapp
-firefox localhost:8080/openmrs &
+[ $(which firefox) ] && firefox localhost:8080/openmrs &
