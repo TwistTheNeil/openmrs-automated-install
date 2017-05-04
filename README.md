@@ -10,8 +10,16 @@ _./linux-install.sh_
 
 ### Info:
 This script installs all the dependencies required to run an instance of
-OpenMRS standalone on Debian, Ubuntu, Debian derived distributions, and
-Fedora. After attempting to deploy OpenMRS, it will present a firefox
+OpenMRS standalone.
+
+Current list of systems supported:
+* Debian (stable)
+* Ubuntu (LTS)
+* CentOS 7 (Unofficially by [besmirzanaj](https://github.com/besmirzanaj))
+* Fedora (Unofficially by [devinmcginty](https://github.com/devinmcginty))
+* Mac (Unofficially by [TheBenderman](https://github.com/TheBenderman))
+
+After attempting to deploy OpenMRS, it will present a firefox
 instance loaded with a url which points to OpenMRS which the user will
 have to manually configure according to their liking.
 
