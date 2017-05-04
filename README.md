@@ -2,7 +2,8 @@
 This repository will contain a script/collection of scripts which will help
 automate the installation of OpenMRS on select operating systems.
 
-_As of now, I will be supporting debian and debian based distributions._
+_As of now, I will be supporting debian and ubuntu._
+_Unfortunately, I can't support many systems with varying configurations._
 
 ### Usage (as root for linux):
 _./linux-install.sh_
@@ -22,3 +23,6 @@ has been deployed.
 
 ### Demonstration:
 [Youtube](https://www.youtube.com/watch?v=o-78lKiN0eE)
+
+### Contributers:
+[Click here for awesome people profiles :)](https://github.com/TwistTheNeil/openmrs-automated-install/graphs/contributors)
