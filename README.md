@@ -14,7 +14,7 @@ OpenMRS standalone.
 
 Current list of systems supported:
 * Debian (stable)
-* Ubuntu (LTS)
+* Ubuntu (latest LTS) ([Manual fix for 14.04 support](https://github.com/TwistTheNeil/openmrs-automated-install/issues/5))
 * CentOS 7 (Unofficially by [besmirzanaj](https://github.com/besmirzanaj))
 * Fedora (Unofficially by [devinmcginty](https://github.com/devinmcginty))
 * Mac (Unofficially by [TheBenderman](https://github.com/TheBenderman))
