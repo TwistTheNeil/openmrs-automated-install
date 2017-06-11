@@ -28,12 +28,11 @@ fi
 readonly GIT_REPO_DIR="$PWD"
 PACMAN=""		# Package manager
 UPDATE="update"		# Package manager option to update system
-UPGRADE="upgrade"	# Package manager option to upgrade system
 pretty_name=""
 release_id=""
 DEPENDENCIES=""
 TOMCAT=""
-DEPENDENCIES=""
+INSTALL="install"
 
 # Find out what system we're working with
 if [ -e /etc/os-release ]; then
@@ -58,6 +57,8 @@ if [ "x${release_id,,}" == "xdebian" ] || [ "x${release_id,,}" == "xubuntu" ]; t
 	DEPENDENCIES="build-essential git openjdk-7* tomcat7 tomcat7-admin tomcat7-common mysql-server curl unzip"
 	PACMAN="apt"
 	TOMCAT="tomcat7"
+	UPDATE="update -y"
+	INSTALL="install -y"
 elif [ "x${release_id,,}" == "xfedora" ]; then
 	DEPENDENCIES="make unzip automake gcc gcc-c++ kernel-devel git java-1.8.0-openjdk tomcat tomcat-webapps.noarch tomcat-admin-webapps.noarch mysql-server curl"
 	PACMAN="dnf"
@@ -75,15 +76,14 @@ echo -e "\tUsing package manager: $PACMAN"
 
 # Update repositories
 $PACMAN $UPDATE
-$PACMAN $UPGRADE
 
 # Install dependencies
 for dep in "$DEPENDENCIES"; do
-	sudo $PACMAN install $dep
+	sudo $PACMAN $INSTALL $dep
 done
 
 # Tomcat was started, we need to stop it for configuration
-service $TOMCAT stop
+systemctl stop $TOMCAT
 
 # Notify user about the need for a password change
 less "${GIT_REPO_DIR}/notes/tomcat-user-linux"
@@ -104,7 +104,7 @@ sed -i 's/^TOMCAT\([0-9]*\)_SECURITY.*/TOMCAT\1_SECURITY=no/' /etc/init.d/$TOMCA
 systemctl daemon-reload
 
 # start tomcat
-service $TOMCAT start
+systemctl start $TOMCAT
 
 # Notify the user about deploying OpenMRS
 less "${GIT_REPO_DIR}/notes/deploy-linux"
